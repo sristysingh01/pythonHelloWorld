@@ -1,0 +1,62 @@
+import pandas as pd
+import numpy as np
+from sklearn.datasets import load_breast_cancer
+cancer = load_breast_cancer()
+df = pd.DataFrame(data=cancer.data, columns=cancer.feature_names)
+df['diagnosis'] = cancer.target
+df['diagnosis_name'] = cancer.target_names[df['diagnosis']]
+print("=" * 60)
+print("DATASET OVERVIEW")
+print("=" * 60)
+
+print(f"\nShape of dataset: {df.shape}")
+print(f"  → {df.shape[0]} rows (tumors) and {df.shape[1]} columns\n")
+
+print("Column names:")
+for col in df.columns:
+    print(f"  - {col}")
+
+print("\nData types per column:")
+print(df.dtypes)
+
+print("\n" + "=" * 60)
+print("FIRST 5 ROWS (head)")
+print("=" * 60)
+print(df.head())
+
+print("\n" + "=" * 60)
+print("LAST 5 ROWS (tail)")
+print("=" * 60)
+print(df.tail())
+
+
+
+print("\n" + "=" * 60)
+print("SUMMARY STATISTICS")
+print("=" * 60)
+print(df.describe().round(2))
+
+
+
+print("\n" + "=" * 60)
+print("MISSING VALUES")
+print("=" * 60)
+missing = df.isnull().sum()
+print(missing)
+print(f"\nTotal missing values: {missing.sum()}")
+print("(The Breast Cancer dataset is clean — no missing values!)")
+
+
+
+print("\n" + "=" * 60)
+print("HOW MANY TUMORS PER CLASS?")
+print("=" * 60)
+print(df['diagnosis_name'].value_counts())
+print()
+print("NOTICE: This dataset is IMBALANCED.")
+print("  benign    → 357 samples (~63%)")
+print("  malignant → 212 samples (~37%)")
+print()
+print("  A model that always predicts 'benign' would be ~63% accurate.")
+print("  That sounds decent — but it would MISS every cancer case!")
+print("  This is why we also look at precision and recall, not just accuracy.")
