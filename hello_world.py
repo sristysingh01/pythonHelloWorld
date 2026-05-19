@@ -5,7 +5,7 @@
 print("Hello, World!")
 
 # Store a value in a variable
-name = "sristy singh"
+name = "SRISY SINGH"
 
 # Use the variable inside a print statement
 print("Hello,", name)
